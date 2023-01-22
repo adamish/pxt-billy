@@ -1,6 +1,8 @@
 #ifndef SAM_H
 #define SAM_H
 
+namespace billy {
+
 #define DEFAULT_SING     false
 #define DEFAULT_PITCH    64
 #define DEFAULT_SPEED    72
@@ -90,6 +92,7 @@ int GetBufferLength();
 
 //unsigned char input[]={" EYAYOYAWOWUW ULUMUNQ YXWXRXLX/XDX\x9b\0"};
 
+}
 
 #endif
 

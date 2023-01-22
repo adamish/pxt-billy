@@ -1,78 +1,130 @@
+enum VoicePreset {
+    //% block="Elf"
+    ELF = 1,
+    //% block="Little Robot"
+    LITTLE_ROBOT = 2,
+    //% block="Stuffy Guy"
+    STUFFY_GUY = 3,
+    //% block="Little Old Lady"
+    LITTLE_OLD_LADY = 4,
+    //% block="Extra_Terrestrial"
+    EXTRA_TERRESTRIAL = 5,
+    //% block="Default"
+    SAM = 6,
+    //% block="Dalek"
+    DALEK = 7
+}
+
 /**
- * Provides access to all the banana functionality.
- * 
- * Function docstrings appear as info the in JavaScript toolbox.
- * 
- * A function defined here with a "shim" entry will run as it is here in the
- * simulator, and the C++ function will run in the micro:bit.
- * Info about shims: https://makecode.com/simshim
- * Info about defining blocks: https://makecode.com/defining-blocks
+ * Define blocks
  */
-
-// Icon unicode characters can be found at: http://fontawesome.io/icons/
-//% color=#c2b711 weight=100 icon="\uf1ec" block="Banana Blocks" advanced=false
-namespace banana {
-
+//% weight=100 color=#7f00ff icon="\uf028"
+namespace billy {
     /**
-     * How many bananas?
-     *
-     * This function is fully implemented in TypeScript.
-     *
-     * @param n number of bananas
+     * Say the following text
+     * @param text words to say
      */
-    //% blockId=banana_bananas
-    //% block="how many bananas %n"
-    export function bananas(n: number): number {
-        return n;
+    //% block
+    //% weight=10
+    export function say(text: string): void {
+        sayShim(text);
+    }
+    /**
+     * Pronounce the following phonemes
+     * e.g. "I am a computer" is "AY4 AEM AH KUMPYUW3TER"
+     * @param phonemes phonemes to pronounce
+     */
+    //% block
+    //% weight=7
+    export function pronounce(phonemes: string): void {
+        pronounceShim(phonemes);
     }
 
     /**
-     * Add your bananas!
-     *
-     * This function is a shim and the micro:bit runs the C++ version.
-     *
-     * @param n number of bananas
+     * Sing a song
+     * e.g. "#115DOWWWWWW#103REYYYYYY#94MIYYYYYY#88FAOAOAOAOR#78SOHWWWWW#70LAOAOAOAOR#62TIYYYYYY#58DOWWWWWW"
+     * @param phonemes phonemes including pitch
      */
-    //% blockId=banana_banana_add
-    //% block="add your bananas %n | + %m"
-    //% shim=banana::banana_add
-    export function bananaAdd(n: number, m: number): number {
-        // Valid function for simulator
-        return n * m;
+    //% block
+    //% weight=6
+    export function sing(phonemes: string): void {
+        singShim(phonemes);
     }
 
     /**
-     * Multiply your bananas by a predefined multiplier depending on the
-     * micro:bit version that runs this code!
-     * 
-     * This function is a shim and the micro:bit runs the C++ version.
-     * The output of this function will depend on the version of the micro:bit
-     * that runs it, V1 or V2.
-     *
-     * @param n number of bananas
+     * Change the voice preset
+     * @param voicePreset Type of voice to use
      */
-    //% blockId=banana_banana_multiplier
-    //% block="multiply your bananas %n"
-    //% shim=banana::banana_multiplier
-    export function bananaMultiplier(n: number): number {
-        // TODO: Figure out how the simulator differentiates between micro:bit
-        //       versions
-        return 0;
+    //% block Change voice preset
+    //% weight=9
+    export function voicePreset(voicePreset: VoicePreset): void {
+        switch (voicePreset) {
+            case VoicePreset.ELF:
+                configureVoice(72, 64, 110, 160);
+                break;
+            case VoicePreset.LITTLE_ROBOT:
+                configureVoice(92, 60, 190, 190);
+                break;
+            case VoicePreset.STUFFY_GUY:
+                configureVoice(82, 72, 110, 105);
+                break;
+            case VoicePreset.LITTLE_OLD_LADY:
+                configureVoice(82, 32, 145, 145);
+                break;
+            case VoicePreset.EXTRA_TERRESTRIAL:
+                configureVoice(100, 64, 150, 200);
+                break;
+            case VoicePreset.SAM:
+                configureVoice(72, 64, 128, 128);
+                break;
+            case VoicePreset.DALEK:
+                configureVoice(120, 100, 100, 200);
+                break;
+            default:
+                break;
+        }
     }
 
     /**
-     * Get your bananas! But this version only works on micro:bit V2.
-     * 
-     * This function is a shim and the micro:bit runs the C++ version.
-     *
-     * @param n number of bananas
+     * Configure voice parameters
+     * @param speed how quickly the voice talks
+     * @param pitch how high or low the voice sounds
+     * @param throat how relaxed or tense is the tone of voice
+     * @param mouth how tight-lipped or overtly enunciating the voice sounds
      */
-    //% blockId=banana_banana_add_v2
-    //% block="how many bananas (V2 only) %n"
-    //% shim=banana::bananas_v2_only
-    export function bananasV2(n: number): number {
-        // TODO: Figure out how the simulator differentiates between micro:bit
-        //       versions
-        return 0;
+    //% block Configure Voice
+    //% speed.min=1 speed.max=255 speed.defl=72
+    //% pitch.min=1 pitch.max=255 pitch.defl=64
+    //% throat.min=1 throat.max=255 throat.defl=128
+    //% mouth.min=1 mouth.max=255 mouth.defl=128
+    //% weight=8
+    export function configureVoice(speed: number, pitch: number, throat: number, mouth: number): void {
+        configureVoiceShim(speed, pitch, throat, mouth)
+    }
+
+    /**
+     *
+     */
+    //% shim=billy::configureVoiceShim
+    function configureVoiceShim(speed: number, pitch: number, throat: number, mouth: number): void {
+        console.log("configureVoice")
+    }
+    /**
+     */
+    //% shim=billy::sayShim
+    function sayShim(text: string): void {
+        console.log(text)
+    }
+    /**
+     */
+    //% shim=billy::singShim
+    function singShim(song: string): void {
+        console.log(song)
+    }
+    /**
+     */
+    //% shim=billy::pronounceShim
+    function pronounceShim(phonemes: string): void {
+        console.log(phonemes)
     }
 }

@@ -7,6 +7,7 @@
 
 #include "debug.h"
 #include "sam.h"
+namespace billy {
 extern int debug;
 
 void AddInflection(sam_memory* sam, unsigned char mem48, unsigned char phase1, unsigned char punctuation);
@@ -932,4 +933,6 @@ unsigned char get_freq2(unsigned char pos, unsigned char throat) {
     } else {
         return freq2data[pos];
     }
+}
+
 }

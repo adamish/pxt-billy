@@ -1,6 +1,8 @@
 #ifndef SAMTABS_H
 #define SAMTABS_H
 
+namespace billy {
+
 //tab40672
 const unsigned char stressInputTable[] =
 {
@@ -211,5 +213,7 @@ SPECIAL
 31   |  Q*     | 01001100 |
 
 */
+
+}
 
 #endif

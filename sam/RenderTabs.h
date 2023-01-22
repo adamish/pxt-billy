@@ -1,5 +1,6 @@
 #ifndef RENDERTABS_H
 #define RENDERTABS_H
+namespace billy {
 
 const unsigned char tab48426[5] = { 0x18, 0x1A, 0x17, 0x17, 0x17 };
 
@@ -511,7 +512,7 @@ const unsigned char sampleTable[0x500] =
 	,  0xFE , 1 , 0xFC , 3 , 0xE0 ,0xF , 0 , 0xFC
 };
 
-
+}
 
 #endif
 

@@ -1,8 +1,11 @@
 #include<stdio.h>
 #include "sam.h"
+#include "SamTabs.h"
 
-extern unsigned char signInputTable1[];
-extern unsigned char signInputTable2[];
+//extern unsigned char signInputTable1[];
+//extern unsigned char signInputTable2[];
+
+namespace billy {
 
 void PrintPhonemes(char* title, phoneme_t *phonemes)
 {
@@ -69,3 +72,5 @@ void PrintRule(int offset)
 	printf("\r\n");
 }
 */
+
+}

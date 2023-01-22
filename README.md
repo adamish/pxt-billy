@@ -1,8 +1,8 @@
-# MakeCode "banana" Example Extension
+# Billy
 
-A simple banana extension.
+This is a MakeCode extension porting the [speech module from BBC micro:bit MicroPython](https://microbit-micropython.readthedocs.io/en/latest/tutorials/speech.html). 
 
-This is an example of a PXT (MakeCode) extension with C++.
+The MicroPython Speech module itself is a port of SAM "Software Automatic Mouth", a legendary text to speech algorithm from 1982 for the Commodore C64
 
 ## Add to a MakeCode Project
 
@@ -11,108 +11,88 @@ This repository can be added as an **extension** in MakeCode.
 - Open https://makecode.microbit.org
 - Click on **New Project**
 - Click on **Extensions** under the gearwheel menu
-- Search for **https://github.com/carlosperate/pxt-banana** and import it
+- Search for **https://github.com/adamish/pxt-billy** and import it
 
-## Edit this extension !["Build status badge"](https://github.com/carlosperate/pxt-banana/workflows/MakeCode/badge.svg)
+## Examples
 
-To edit this repository in MakeCode.
+Basic usage
 
-- Open https://makecode.microbit.org
-- Click on **Import** then click on **Import URL**
-- Paste **https://github.com/carlosperate/pxt-banana** and click import
+```block
+input.onButtonPressed(Button.A, function () {
+    billy.say("Hello World")
+})
 
-After the extension is imported it can be tested via a second MakeCode
-workspace/tab, which can load the opened extension from the original
-workspace/tab:
-
-- Click the Github Icon at the bottom of the editor, next to the project name
-    - This is usually were the "save" (floppy disk) icon usually is placed
-- Scroll down to the "Extension zone", click on the "Test Extension" button
-- A new MakeCode tab or window should be opened, which automatically has your
-  extension loaded
-- Any changes on the MakeCode workspace with the extension will be synced with
-  the second workspace with the test project
-    - Whenever changes are made to the extension workspace, make sure you
-      refresh the test project window to ensure the changes are loaded
-
-## Other options for the config files
-
-JSON files cannot contain comments, so optional settings are documented here:
-
-### Configure the extension to only build for micro:bit V1 or V2
-
-If the extension contains any C++ code, MakeCode will attempt to compile it
-with the micro:bit V1 DAL **and** micro:bit V2 CODAL.
-If the C++ code is not compatible with both, it will cause compilation errors.
-This `pxt.json` entry can configure what version to exclude.
-
-To exclude V1 DAL compilation use value `mbdal`, to exclude V2 CODAL use
-`mbcodal`:
-```json
-{
-    "disablesVariants": [
-        "mbdal"
-    ]
-}
+input.onButtonPressed(Button.B, function () {
+    billy.say("I am a DALEK - EXTERMINATE")
+})
 ```
 
-### Add DAL or CODAL flags to the build
+The voice can be configured from an existing preset
 
-For example, these are the BLE flags for CODAL (`DEVICE_BLE`,
-`SOFTDEVICE_PRESENT`, `MICROBIT_BLE_ENABLED`) and DAL
-(`microbit-dal -> bluetooth -> enabled`).
-
-```json
-{
-    "yotta": {
-        "config": {
-            "codal": {
-                "DEVICE_BLE": 1,
-                "SOFTDEVICE_PRESENT": 1,
-                "MICROBIT_BLE_ENABLED": 1
-            },
-            "microbit-dal": {
-                "bluetooth": {
-                    "enabled": 1
-                }
-            }
-        }
-    }
-}
+```
+input.onButtonPressed(Button.A, function () {
+    billy.configureVoice(VoicePreset.DALEK)
+    billy.say("I am a DALEK - EXTERMINATE")
+})
 ```
 
-## Blocks preview
+The voice can be configured with individual values for speed, pitch, throat and mouth 
+* speed - how quickly the voice talks
+* pitch - how high or low the voice sounds
+* throat - how relaxed or tense is the tone of voice
+* mouth - how tight-lipped the voice sounds
 
-This image shows the blocks code from the last commit in master.
-This image may take a few minutes to refresh.
+Each value is in the range of 0 to 255
 
-![A rendered view of the blocks](https://github.com/carlosperate/pxt-banana/raw/master/.github/makecode/blocks.png)
-
-## Available blocks in this extension
-
-```blocks
-basic.showNumber(banana.bananas(1))
+```
+input.onButtonPressed(Button.A, function () {
+    billy.configureVoice(92, 60, 190, 190);
+    billy.say("I am a robot")
+})
 ```
 
-```sig
-basic.showNumber(banana.bananaAdd(2, 3))
+Advanced pronounciation can be achieved with direct use of phonemes
+
+See [original SAM manual](https://github.com/discordier/sam/blob/master/docs/manual.md) for full details of the syntax 
+
+```block
+input.onButtonPressed(Button.A, function () {
+    billy.pronounce("HEHLOW WERLD")
+})
 ```
 
-```blocks
-basic.showNumber(banana.bananaMultiplier(4))
+Singing is support by annotating phonemes with pitch constants. 
+
+See [original SAM manual](https://github.com/discordier/sam/blob/master/docs/manual.md) for full details of the syntax 
+
+This example is "Do re mi fa so la ti do"
+
+```block
+input.onButtonPressed(Button.A, function () {
+    billy.sing("#115DOWWWWWW#103REYYYYYY#94MIYYYYYY#88FAOAOAOAOR#78SOHWWWWW#70LAOAOAOAOR#62TIYYYYYY#58DOWWWWWW"")
+})
 ```
 
-```blocks
-basic.showNumber(banana.bananasV2(5))
-```
-
-## License
-
-MIT
-
-#### Metadata (used for search, rendering)
+## Supported targets
 
 * for PXT/microbit
 
-<script src="https://makecode.com/gh-pages-embed.js"></script>
-<script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+(The metadata above is needed for package search, update it with the targets you support)
+
+## Acknowledgements
+* Icon from [Text to speech icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/text-to-speech)
+* Based on [BBC micro:bit MicroPython Speech](https://microbit-micropython.readthedocs.io/en/latest/tutorials/speech.html)
+
+## License 
+
+MIT
+
+## Links
+
+ * [BBC micro:bit MicroPython - docs](https://microbit-micropython.readthedocs.io/en/latest/tutorials/speech.html)
+ * [BBC micro:bit MicroPython - SAM port](https://github.com/bbcmicrobit/micropython/tree/master/source/lib/sam)
+ * [BBC micro:bit MicroPython - wrapper](https://github.com/bbcmicrobit/micropython/blob/master/source/microbit/modspeech.c)
+ * [Original C port](https://github.com/s-macke/SAM)
+ * [SpeakerTest.cpp](https://github.com/lancaster-university/microbit-v2-samples/blob/master/source/samples/SpeakerTest.cpp)
+ * [Original SAM manual](https://archive.org/details/user_manual_s.a.m.)
+ 

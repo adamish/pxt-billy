@@ -1,7 +1,7 @@
 #ifndef RENDER_H
 #define RENDER_H
-
 #include "sam.h"
+namespace billy {
 
 void Render(sam_memory* sam);
 void SetMouthThroat(unsigned char mouth, unsigned char throat);
@@ -13,4 +13,5 @@ void OutputFrames(sam_memory *sam, unsigned char frame_count);
 // Rate for 7.8125KHz
 #define SCALE_RATE(x) (((x)*420)>>16)
 
+}
 #endif

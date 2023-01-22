@@ -1,0 +1,9 @@
+/.project
+/node_modules
+/pxt_modules
+/package-lock.json
+/package.json
+/built
+/enums.d.ts
+/shims.d.ts
+*.o

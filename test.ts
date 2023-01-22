@@ -1,10 +1,18 @@
-// tests go here; this will not be compiled when this package is used as a library
+billy.say("Test 1 2 3 4")
 
-basic.forever(() => {
-    basic.showNumber(banana.bananas(3))
-    basic.pause(1000)
-    basic.showNumber(banana.bananaMultiplier(3))
-    basic.pause(1000)
-    basic.showNumber(banana.bananaMultiply(3, 3))
-    basic.pause(1000)
-})
+billy.voicePreset(VoicePreset.ELF)
+billy.say("Test 1 2 3 4")
+
+billy.voicePreset(VoicePreset.LITTLE_ROBOT)
+billy.say("Test 1 2 3 4")
+
+billy.voicePreset(VoicePreset.EXTRA_TERRESTRIAL)
+billy.say("Test 1 2 3 4")
+
+billy.configureVoice(92, 60, 190, 190)
+billy.say("Test 1 2 3 4")
+
+billy.voicePreset(VoicePreset.SAM)
+billy.sing("#115DOWWWWWW#103REYYYYYY#94MIYYYYYY")
+
+billy.pronounce("AY4 AEM AH KUMPYUW3TER")

@@ -1,0 +1,23 @@
+{
+    "name": "banana-extension",
+    "version": "0.0.3",
+    "description": "An example extension with a banana flavour.",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*",
+        "radio": "*"
+    },
+    "files": [
+        "README.md",
+        "main.ts",
+        "banana.cpp"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "tsprj"
+}

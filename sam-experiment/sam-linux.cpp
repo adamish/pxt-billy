@@ -24,7 +24,7 @@ int main(void) {
     sam.common.throat = DEFAULT_THROAT;
 
     billy::reciter_memory mem;
-    char *example = "Hello";
+    char *example = "Hello this a test 1 2 3 adam";
     for (int i = 0; i < sizeof(mem.input); i++) {
         mem.input[i] = 0;
     }
@@ -78,7 +78,32 @@ int main(void) {
 
 namespace billy {
 int debug = 1;
+
+
+int outputPos = 0;
+int bufferSize = 256;
+char buffer[256];
+int inputPosOffset = 0;
+
 void SamOutputByte(unsigned int pos, unsigned char b) {
-    w->write(b);
+    unsigned int actual_pos = SCALE_RATE(pos);
+
+    int offset = actual_pos - inputPosOffset;
+    if (offset >= 0 && offset < bufferSize) {
+        buffer[offset] = b;
+        std::cout << "actual " << actual_pos << " offset " << offset << std::endl;
+    }
+    if (offset >= bufferSize - 1) {
+        /*
+         * start next buffer, flush
+         */
+        outputPos = 0;
+        inputPosOffset += bufferSize;
+        std::cout << "Flush" << std::endl;
+        for (int i = 0; i < bufferSize; i++) {
+            w->write(buffer[i]);
+        }
+    }
+
 }
 }

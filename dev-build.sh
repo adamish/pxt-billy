@@ -8,3 +8,5 @@ fi;
 export PXT_NODOCKER=1
 
 pxt build --local
+
+cp  ./built/binary.hex /media/sf_Downloads/

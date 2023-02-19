@@ -27,7 +27,6 @@
 namespace billy {
 
 Billy::Billy() {
-    sam = new sam_memory();
 }
 
 
@@ -42,13 +41,13 @@ void Billy::init() {
 
     // not required?
     // uBit.audio.setVolume(255);
-    // uBit.audio.setSpeakerEnabled(true);
+     //uBit.audio.setSpeakerEnabled(false);
     // uBit.io.speaker.setHighDrive(true);
 }
 
 void Billy::flushRemainder() {
-    if (outputBufferPos > 0) {
-        sampleSource->play(outputBuffer, outputBufferPos);
+    if (outputBufferFill > 0) {
+        sampleSource->play(outputBuffer, outputBufferFill);
     }
 }
 
@@ -65,9 +64,10 @@ void Billy::configureVoice(int pitch, int speed, int mouth, int throat) {
 void Billy::say(const char * words) {
 
     // load
-    billy::reciter_memory mem;
-    for (unsigned int i = 0; i < sizeof(mem.input); i++) {
-        mem.input[i] = 0;
+
+    char input[256];
+    for (unsigned int i = 0; i < sizeof(input); i++) {
+        input[i] = 0;
     }
     unsigned int length = strlen(words);
     // Reciter truncates *output* at about 120 characters.
@@ -76,59 +76,63 @@ void Billy::say(const char * words) {
         length = 80;
     }
     for (unsigned int i = 0; i < length; i++) {
-        mem.input[i] = words[i];
+        input[i] = words[i];
     }
     // convert
-    if (billy::TextToPhonemes(&mem) == 0) {
+    if (billy::TextToPhonemes((unsigned char *)input) == 0) {
         uBit.display.print('X');
     }
 
-    /*
-     * mem.input gets padded with spaces,
-     * find the first non-space character
-     */
-    unsigned int lastCharIndex = 0;
-    for (int i = strlen(mem.input) - 2; i > 0; i--) {
-        if (mem.input[i] != 32) {
-            lastCharIndex = i;
-            break;
-        }
-    }
-    // null terminate so behaves nicely with strlen()
-    mem.input[lastCharIndex + 1] = 0;
-
-    pronounce(mem.input, false);
+    pronounce(input, false);
 }
 
 void Billy::pronounce(const char * phonemes, bool sing) {
 
-    sam->common.singmode = sing;
-    sam->common.pitch = pitch;
-    sam->common.speed = speed;
-    sam->common.mouth = mouth;
-    sam->common.throat = throat;
+    SetSingmode(0);
+    SetSpeed(speed);
+    SetPitch(pitch);
+    SetMouth(mouth);
+    SetThroat(throat);
 
     // prepare buffer
-    outputBufferPos = 0;
+    inputPosOffset = 0;
+    outputBufferFill = 0;
+    outputBufferCount = 0;
+
+    for (int i = 0; i < sizeof(outputBuffer); i++) {
+        outputBuffer[i] = 0;
+    }
 
     // playback
-    billy::SetInput(sam, phonemes, strlen(phonemes));
-    if (billy::SAMMain(sam) == 0) {
+    billy::SetInput((char*)phonemes);
+    if (billy::SAMMain() == 0) {
         uBit.display.print('X');
     }
+
+    uBit.display.print('O');
     flushRemainder();
 }
 
 void Billy::outputByte(unsigned int pos, unsigned char value) {
-    outputBuffer[outputBufferPos] = value;
-    outputBufferPos++;
+    /*
+     * pos doesn't necessary increase monotonically so fill our buffer by index.
+     */
+    int offset = pos - inputPosOffset;
+    if (offset >= 0 && offset < outputBufferSize) {
+        outputBuffer[offset] = value;
+        if (offset > outputBufferFill) {
+            // high water mark
+            outputBufferFill = offset;
+        }
+    }
 
-    if (outputBufferPos >= outputBufferSize) {
-        outputBufferPos = 0;
-        /*
-         *  play() is blocking so can just wait for completion
-         */
+    int posFrame = pos / outputBufferSize;
+    if (posFrame > outputBufferCount) {
+        outputBufferCount = posFrame;
         sampleSource->play(outputBuffer, outputBufferSize);
+        outputBufferFill = 0;
+        // move offset onto next window
+        inputPosOffset = outputBufferCount * outputBufferSize;
     }
 }
 

@@ -34,18 +34,25 @@
 
 namespace billy {
 const unsigned int outputBufferSize = 4096;
-const int sampleRate = 7812;
+const int sampleRate = 22500;
 
 class Billy {
     MemorySource *sampleSource = NULL;
     uint8_t outputBuffer[outputBufferSize];
-    unsigned int outputBufferPos = 0;
+    /*
+     * how much of outputBuffer is current filled
+     */
+    unsigned int outputBufferFill = 0;
+    /*
+     * how many output buffers have been flushed
+     */
+    unsigned int outputBufferCount = 0;
+    unsigned int inputPosOffset = 0;
     void flushRemainder();
     int speed = 64;
     int pitch = 72;
     int mouth = 128;
     int throat = 128;
-    sam_memory * sam;
 public:
     Billy();
     void init();

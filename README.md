@@ -1,6 +1,6 @@
 # Billy
 
-This is a MakeCode extension porting the [speech module from BBC micro:bit MicroPython](https://microbit-micropython.readthedocs.io/en/latest/tutorials/speech.html). 
+This is a MakeCode extension using a [C port of SAM](https://github.com/s-macke/SAM). 
 
 The MicroPython Speech module itself is a port of SAM "Software Automatic Mouth", a legendary text to speech algorithm from 1982 for the Commodore C64
 
@@ -81,7 +81,8 @@ input.onButtonPressed(Button.A, function () {
 
 ## Acknowledgements
 * Icon from [Text to speech icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/text-to-speech)
-* Based on [BBC micro:bit MicroPython Speech](https://microbit-micropython.readthedocs.io/en/latest/tutorials/speech.html)
+* Uses a modified version of a [C port of SAM](https://github.com/s-macke/SAM)
+* Inspired by [BBC micro:bit MicroPython speech module](https://github.com/bbcmicrobit/micropython/tree/master/source/lib/sam)
 
 ## License 
 

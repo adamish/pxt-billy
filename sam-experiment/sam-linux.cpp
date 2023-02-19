@@ -22,13 +22,13 @@ int main(void) {
 //    billy::sam_memory *samPtr = &sam;
 
     SetSingmode(0);
-//    SetSpeed(72);
-//    SetPitch(64);
-//    SetMouth(128);
-//    SetThroat(128);
+    SetSpeed(72);
+    SetPitch(64);
+    SetMouth(128);
+    SetThroat(128);
 
 //    billy::reciter_memory mem;
-    char *example = "Hello this is a test";
+    char *example = "Hello world";
     for (int i = 0; i < sizeof(input); i++) {
         input[i] = 0;
     }
@@ -77,7 +77,7 @@ int main(void) {
 //    std::cout << billy::sam_error << std::endl;
 
     for (int i = 0; i < sizeof(buffer); i++) {
-       w->write(buffer[i]);
+//       w->write(buffer[i]);
     }
     w->close();
     return 0;
@@ -86,10 +86,26 @@ int main(void) {
 namespace billy {
 int debug = 1;
 
+int outputPos = 0;
+int bufferSize = 4096;
+char buffer2[4096];
+int inputPosOffset = 0;
+
 void SamOutputByte(unsigned int pos, unsigned char b) {
-    std::cout << pos << std::endl;
-//    w->write(b);
-    buffer[pos] = b;
+
+    int offset = pos - inputPosOffset;
+    if (offset >= 0 && offset < bufferSize) {
+        buffer2[offset] = b;
+    }
+    if (offset >= bufferSize - 1) {
+        std::cout << "Output flush " << pos << std::endl;
+        outputPos = 0;
+        inputPosOffset += bufferSize;
+        for (int i = 0; i < bufferSize; i++) {
+            w->write(buffer2[i]);
+            buffer2[i] = 0;
+        }
+    }
 }
 
 }

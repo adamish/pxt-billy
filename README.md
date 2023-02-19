@@ -57,19 +57,7 @@ See [original SAM manual](https://github.com/discordier/sam/blob/master/docs/man
 
 ```block
 input.onButtonPressed(Button.A, function () {
-    billy.pronounce("HEHLOW WERLD")
-})
-```
-
-Singing is support by annotating phonemes with pitch constants. 
-
-See [original SAM manual](https://github.com/discordier/sam/blob/master/docs/manual.md) for full details of the syntax 
-
-This example is "Do re mi fa so la ti do"
-
-```block
-input.onButtonPressed(Button.A, function () {
-    billy.sing("#115DOWWWWWW#103REYYYYYY#94MIYYYYYY#88FAOAOAOAOR#78SOHWWWWW#70LAOAOAOAOR#62TIYYYYYY#58DOWWWWWW"")
+    billy.pronounce("/HEHLOW WERLD")
 })
 ```
 

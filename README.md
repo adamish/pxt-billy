@@ -1,8 +1,8 @@
 # Billy
 
-This is a MakeCode extension using a [C port of SAM](https://github.com/s-macke/SAM). 
+This is a MakeCode extension based on a [port of SAM](https://github.com/s-macke/SAM) by Sebastian Macke. 
 
-The MicroPython Speech module itself is a port of SAM "Software Automatic Mouth", a legendary text to speech algorithm from 1982 for the Commodore C64
+SAM "Software Automatic Mouth" itself is a legendary text to speech algorithm from 1982 for the Commodore C64
 
 ## Add to a MakeCode Project
 
@@ -37,12 +37,12 @@ input.onButtonPressed(Button.A, function () {
 ```
 
 The voice can be configured with individual values for speed, pitch, throat and mouth 
-* speed - how quickly the voice talks
+Each value is in the range of 0 to 255
+
+* speed - how quickly the voice talks - low value slow, high value fast
 * pitch - how high or low the voice sounds
 * throat - how relaxed or tense is the tone of voice
 * mouth - how tight-lipped the voice sounds
-
-Each value is in the range of 0 to 255
 
 ```
 input.onButtonPressed(Button.A, function () {
@@ -81,8 +81,8 @@ input.onButtonPressed(Button.A, function () {
 
 ## Acknowledgements
 * Icon from [Text to speech icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/text-to-speech)
-* Uses a modified version of a [C port of SAM](https://github.com/s-macke/SAM)
-* Inspired by [BBC micro:bit MicroPython speech module](https://github.com/bbcmicrobit/micropython/tree/master/source/lib/sam)
+* Sebastian Macke - author of the [C port of SAM](https://github.com/s-macke/SAM)
+* Authors of [BBC micro:bit MicroPython speech module](https://github.com/bbcmicrobit/micropython/tree/master/source/lib/sam) for inspiration
 
 ## License 
 

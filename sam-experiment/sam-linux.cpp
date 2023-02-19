@@ -11,58 +11,60 @@
 
 using namespace billy;
 
-char input[256];
-
 WavWriter *w;
 
-char buffer[50000];
-
 int main(void) {
-//    billy::sam_memory sam;
-//    billy::sam_memory *samPtr = &sam;
 
-    SetSingmode(0);
+    char input[256];
+
+    SetSingmode(1);
     SetSpeed(72);
     SetPitch(64);
     SetMouth(128);
     SetThroat(128);
 
-//    billy::reciter_memory mem;
-    char *example = "Hello world";
-    for (int i = 0; i < sizeof(input); i++) {
+    const char *example = "I am a computer";
+    for (unsigned int i = 0; i < sizeof(input); i++) {
         input[i] = 0;
     }
-    for (int i = 0; i < strlen(example); i++) {
+    for (unsigned int i = 0; i < strlen(example); i++) {
         input[i] = example[i];
     }
 
     int x = billy::TextToPhonemes((unsigned char *)input);
     std::cout << "TextToPhonemes " << x << std::endl;
 
-    for (int i = 0; i < strlen(input); i++) {
+    for (unsigned int i = 0; i < 256; i++) {
         std::cout << input[i];
     }
     std::cout << std::endl;
 
-    for (int i = 0; i < strlen(input); i++) {
-        std::cout << i << ":" << (int) input[i] <<  std::endl;
+    for (unsigned int i = 0; i < 256; i++) {
+        std::cout << (int) input[i] << ",";
     }
     std::cout << std::endl;
 
-    const char *ph = input;
+    SetSingmode(1);
+    EnableSingmode();
 
-    /*
-     * input gets padded with spaces,
-     * find the first non-space character
-     */
-    unsigned int lastCharIndex = 0;
-    for (int i = strlen(input) - 2; i > 0; i--) {
-        if (input[i] != 32) {
-            lastCharIndex = i;
-            break;
-        }
+    const char *ph = "#115AY4";
+
+    for (unsigned int i = 0; i < sizeof(input); i++) {
+        input[i] = 32;
     }
-//    input[lastCharIndex + 1] = 0;
+    unsigned int length = strlen(ph);
+    if (length > 255) {
+        length = 255;
+    }
+    for (unsigned int i = 0; i < length; i++) {
+        input[i] = ph[i];
+    }
+    input[length] = -101;
+    std::cout << "Length " << strlen(input) << std::endl;
+    for (unsigned int i = 0; i < strlen(input); i++) {
+        std::cout << (int) input[i] << ",";
+    }
+    std::cout << std::endl;
 
     std::cout << "Length " << strlen(ph) << std::endl;
     billy::SetInput(input);
@@ -74,11 +76,7 @@ int main(void) {
     std::cout << ph << std::endl;
     int ret = billy::SAMMain();
     std::cout << "main " << ret << std::endl;
-//    std::cout << billy::sam_error << std::endl;
 
-    for (int i = 0; i < sizeof(buffer); i++) {
-//       w->write(buffer[i]);
-    }
     w->close();
     return 0;
 }
@@ -86,24 +84,23 @@ int main(void) {
 namespace billy {
 int debug = 1;
 
-int outputPos = 0;
-int bufferSize = 4096;
-char buffer2[4096];
-int inputPosOffset = 0;
+unsigned int outputPos = 0;
+unsigned int bufferSize = 4096;
+char bufferSound[4096];
+unsigned int inputPosOffset = 0;
 
 void SamOutputByte(unsigned int pos, unsigned char b) {
 
-    int offset = pos - inputPosOffset;
+    unsigned int offset = pos - inputPosOffset;
     if (offset >= 0 && offset < bufferSize) {
-        buffer2[offset] = b;
+        bufferSound[offset] = b;
     }
     if (offset >= bufferSize - 1) {
-        std::cout << "Output flush " << pos << std::endl;
+//        std::cout << "Output flush " << pos << std::endl;
         outputPos = 0;
         inputPosOffset += bufferSize;
-        for (int i = 0; i < bufferSize; i++) {
-            w->write(buffer2[i]);
-            buffer2[i] = 0;
+        for (unsigned int i = 0; i < bufferSize; i++) {
+            w->write(bufferSound[i]);
         }
     }
 }

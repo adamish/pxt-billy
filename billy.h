@@ -34,7 +34,7 @@
 
 namespace billy {
 const unsigned int outputBufferSize = 4096;
-const int sampleRate = 22500;
+const int sampleRate = 22050;
 
 class Billy {
     MemorySource *sampleSource = NULL;
@@ -53,6 +53,7 @@ class Billy {
     int pitch = 72;
     int mouth = 128;
     int throat = 128;
+    void resetBuffer();
 public:
     Billy();
     void init();

@@ -42,12 +42,13 @@ namespace billy {
 
     /**
      * Sing a song
+     * Coming soon, not supported yet.
      * e.g. "#115DOWWWWWW#103REYYYYYY#94MIYYYYYY#88FAOAOAOAOR#78SOHWWWWW#70LAOAOAOAOR#62TIYYYYYY#58DOWWWWWW"
      * @param phonemes phonemes including pitch
      */
     //% block
     //% weight=6
-    export function sing(phonemes: string): void {
+    function sing(phonemes: string): void {
         singShim(phonemes);
     }
 
@@ -132,4 +133,3 @@ namespace billy {
         console.log(phonemes)
     }
 }
-

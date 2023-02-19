@@ -88,29 +88,43 @@ void Billy::say(const char * words) {
 
 void Billy::pronounce(const char * phonemes, bool sing) {
 
-    SetSingmode(0);
+    // ensure in a 256 input in case called directly
+    char input[256];
+    for (unsigned int i = 0; i < sizeof(input); i++) {
+        input[i] = 32;
+    }
+    unsigned int length = strlen(phonemes);
+    if (length > 255) {
+        length = 255;
+    }
+    for (unsigned int i = 0; i < length; i++) {
+        input[i] = phonemes[i];
+    }
+    input[length] = -101;
+
+    SetSingmode(sing ? 1 : 0);
     SetSpeed(speed);
     SetPitch(pitch);
     SetMouth(mouth);
     SetThroat(throat);
 
-    // prepare buffer
-    inputPosOffset = 0;
-    outputBufferFill = 0;
-    outputBufferCount = 0;
-
-    for (int i = 0; i < sizeof(outputBuffer); i++) {
-        outputBuffer[i] = 0;
-    }
+    resetBuffer();
 
     // playback
-    billy::SetInput((char*)phonemes);
+    billy::SetInput((char*)input);
     if (billy::SAMMain() == 0) {
         uBit.display.print('X');
     }
-
-    uBit.display.print('O');
     flushRemainder();
+}
+
+void Billy::resetBuffer() {
+    inputPosOffset = 0;
+    outputBufferFill = 0;
+    outputBufferCount = 0;
+    for (unsigned int i = 0; i < sizeof(outputBuffer); i++) {
+        outputBuffer[i] = 0;
+    }
 }
 
 void Billy::outputByte(unsigned int pos, unsigned char value) {
@@ -126,9 +140,9 @@ void Billy::outputByte(unsigned int pos, unsigned char value) {
         }
     }
 
-    int posFrame = pos / outputBufferSize;
-    if (posFrame > outputBufferCount) {
-        outputBufferCount = posFrame;
+    unsigned int newOutputBufferCount = pos / outputBufferSize;
+    if (newOutputBufferCount > outputBufferCount) {
+        outputBufferCount = newOutputBufferCount;
         sampleSource->play(outputBuffer, outputBufferSize);
         outputBufferFill = 0;
         // move offset onto next window

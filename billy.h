@@ -59,7 +59,7 @@ public:
     void init();
     void say(const char * words);
     void pronounce(const char * phonemes, bool sing);
-    void configureVoice(int pitch, int speed, int mouth, int throat);
+    void configureVoice(int speed, int pitch, int mouth, int throat);
     void outputByte(unsigned int pos, unsigned char value);
 };
 

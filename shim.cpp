@@ -41,8 +41,8 @@ void SamOutputByte(unsigned int pos, unsigned char value) {
  *
  */
 //%
-void configureVoiceShim(int pitch, int speed, int mouth, int throat) {
-   b.configureVoice(pitch, speed, mouth, throat);
+void configureVoiceShim(int speed, int pitch, int mouth, int throat) {
+   b.configureVoice(speed, pitch, mouth, throat);
 }
 
 /**

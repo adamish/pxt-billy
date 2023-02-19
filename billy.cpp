@@ -51,9 +51,9 @@ void Billy::flushRemainder() {
     }
 }
 
-void Billy::configureVoice(int pitch, int speed, int mouth, int throat) {
-    this->pitch = pitch;
+void Billy::configureVoice(int speed, int pitch, int mouth, int throat) {
     this->speed = speed;
+    this->pitch = pitch;
     this->mouth = mouth;
     this->throat = throat;
 }

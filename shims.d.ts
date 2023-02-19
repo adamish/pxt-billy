@@ -5,7 +5,7 @@ declare namespace billy {
      *
      */
     //% shim=billy::configureVoiceShim
-    function configureVoiceShim(pitch: int32, speed: int32, mouth: int32, throat: int32): void;
+    function configureVoiceShim(speed: int32, pitch: int32, mouth: int32, throat: int32): void;
 
     /**
      *

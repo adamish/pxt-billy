@@ -27,7 +27,7 @@ namespace billy {
     //% block
     //% weight=10
     export function say(text: string): void {
-        sayShim(text);
+        sayShim(text)
     }
     /**
      * Pronounce the following phonemes
@@ -37,19 +37,7 @@ namespace billy {
     //% block
     //% weight=7
     export function pronounce(phonemes: string): void {
-        pronounceShim(phonemes);
-    }
-
-    /**
-     * Sing a song
-     * Coming soon, not supported yet.
-     * e.g. "#115DOWWWWWW#103REYYYYYY#94MIYYYYYY#88FAOAOAOAOR#78SOHWWWWW#70LAOAOAOAOR#62TIYYYYYY#58DOWWWWWW"
-     * @param phonemes phonemes including pitch
-     */
-    //% block
-    //% weight=6
-    function sing(phonemes: string): void {
-        singShim(phonemes);
+        pronounceShim(phonemes)
     }
 
     /**
@@ -61,28 +49,28 @@ namespace billy {
     export function voicePreset(voicePreset: VoicePreset): void {
         switch (voicePreset) {
             case VoicePreset.ELF:
-                configureVoice(183, 64, 110, 160);
-                break;
+                configureVoice(183, 64, 110, 160)
+                break
             case VoicePreset.LITTLE_ROBOT:
-                configureVoice(163, 60, 190, 190);
-                break;
+                configureVoice(163, 60, 190, 190)
+                break
             case VoicePreset.STUFFY_GUY:
-                configureVoice(173, 72, 110, 105);
-                break;
+                configureVoice(173, 72, 110, 105)
+                break
             case VoicePreset.LITTLE_OLD_LADY:
-                configureVoice(173, 32, 145, 145);
-                break;
+                configureVoice(173, 32, 145, 145)
+                break
             case VoicePreset.EXTRA_TERRESTRIAL:
-                configureVoice(155, 64, 150, 200);
-                break;
+                configureVoice(155, 64, 150, 200)
+                break
             case VoicePreset.SAM:
-                configureVoice(183, 64, 128, 128);
-                break;
+                configureVoice(183, 64, 128, 128)
+                break
             case VoicePreset.DALEK:
-                configureVoice(135, 100, 100, 200);
-                break;
+                configureVoice(135, 100, 100, 200)
+                break
             default:
-                break;
+                break
         }
     }
 
@@ -119,12 +107,6 @@ namespace billy {
     //% shim=billy::sayShim
     function sayShim(text: string): void {
         console.log(text)
-    }
-    /**
-     */
-    //% shim=billy::singShim
-    function singShim(song: string): void {
-        console.log(song)
     }
     /**
      */

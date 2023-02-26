@@ -36,8 +36,8 @@ void Billy::init() {
         sampleSource = new MemorySource();
         sampleSource->setFormat(DATASTREAM_FORMAT_8BIT_UNSIGNED);
         sampleSource->setBufferSize(outputBufferSize);
+        uBit.audio.mixer.addChannel(*sampleSource, sampleRate, 255);
     }
-    uBit.audio.mixer.addChannel(*sampleSource, sampleRate, 255);
 
     // not required?
     // uBit.audio.setVolume(255);

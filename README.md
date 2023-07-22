@@ -31,7 +31,7 @@ The voice can be configured from an existing preset
 
 ```
 input.onButtonPressed(Button.A, function () {
-    billy.configureVoice(VoicePreset.DALEK)
+    billy.configureVoice(VoicePreset.Dalek)
     billy.say("I am a DALEK - EXTERMINATE")
 })
 ```

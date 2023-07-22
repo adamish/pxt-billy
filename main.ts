@@ -1,18 +1,18 @@
 enum VoicePreset {
     //% block="elf"
-    ELF = 1,
+    Elf = 1,
     //% block="little robot"
-    LITTLE_ROBOT = 2,
+    LittleRobot = 2,
     //% block="stuffy guy"
-    STUFFY_GUY = 3,
+    StuffyGuy = 3,
     //% block="little old lady"
-    LITTLE_OLD_LADY = 4,
+    LittleOldLady = 4,
     //% block="extra_terrestrial"
-    EXTRA_TERRESTRIAL = 5,
+    ExtraTerrestrial = 5,
     //% block="default"
-    SAM = 6,
+    Sam = 6,
     //% block="dalek"
-    DALEK = 7
+    Dalek = 7
 }
 
 /**
@@ -48,25 +48,25 @@ namespace billy {
     //% weight=9
     export function voicePreset(voicePreset: VoicePreset): void {
         switch (voicePreset) {
-            case VoicePreset.ELF:
+            case VoicePreset.Elf:
                 configureVoice(183, 64, 110, 160)
                 break
-            case VoicePreset.LITTLE_ROBOT:
+            case VoicePreset.LittleRobot:
                 configureVoice(163, 60, 190, 190)
                 break
-            case VoicePreset.STUFFY_GUY:
+            case VoicePreset.StuffyGuy:
                 configureVoice(173, 72, 110, 105)
                 break
-            case VoicePreset.LITTLE_OLD_LADY:
+            case VoicePreset.LittleOldLady:
                 configureVoice(173, 32, 145, 145)
                 break
-            case VoicePreset.EXTRA_TERRESTRIAL:
+            case VoicePreset.ExtraTerrestrial:
                 configureVoice(155, 64, 150, 200)
                 break
-            case VoicePreset.SAM:
+            case VoicePreset.Sam:
                 configureVoice(183, 64, 128, 128)
                 break
-            case VoicePreset.DALEK:
+            case VoicePreset.Dalek:
                 configureVoice(135, 100, 100, 200)
                 break
             default:

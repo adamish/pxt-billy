@@ -21,6 +21,7 @@ enum VoicePreset {
 /**
  * Text to speech extension
  */
+//% block="Billy"
 //% weight=100 color=#7f00ff icon="\uf028"
 namespace billy {
     /**

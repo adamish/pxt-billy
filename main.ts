@@ -1,22 +1,25 @@
+/**
+ * Preset voice
+ */
 enum VoicePreset {
-    //% block="Elf"
-    ELF = 1,
-    //% block="Little Robot"
-    LITTLE_ROBOT = 2,
-    //% block="Stuffy Guy"
-    STUFFY_GUY = 3,
-    //% block="Little Old Lady"
-    LITTLE_OLD_LADY = 4,
-    //% block="Extra_Terrestrial"
-    EXTRA_TERRESTRIAL = 5,
-    //% block="Default"
-    SAM = 6,
-    //% block="Dalek"
-    DALEK = 7
+    //% block="elf"
+    Elf = 1,
+    //% block="little robot"
+    LittleRobot = 2,
+    //% block="stuffy guy"
+    StuffyGuy = 3,
+    //% block="little old lady"
+    LittleOldLady = 4,
+    //% block="extra_terrestrial"
+    ExtraTerrestrial = 5,
+    //% block="default"
+    Sam = 6,
+    //% block="dalek"
+    Dalek = 7
 }
 
 /**
- * Define blocks
+ * Text to speech extension
  */
 //% weight=100 color=#7f00ff icon="\uf028"
 namespace billy {
@@ -48,25 +51,25 @@ namespace billy {
     //% weight=9
     export function voicePreset(voicePreset: VoicePreset): void {
         switch (voicePreset) {
-            case VoicePreset.ELF:
+            case VoicePreset.Elf:
                 configureVoice(183, 64, 110, 160)
                 break
-            case VoicePreset.LITTLE_ROBOT:
+            case VoicePreset.LittleRobot:
                 configureVoice(163, 60, 190, 190)
                 break
-            case VoicePreset.STUFFY_GUY:
+            case VoicePreset.StuffyGuy:
                 configureVoice(173, 72, 110, 105)
                 break
-            case VoicePreset.LITTLE_OLD_LADY:
+            case VoicePreset.LittleOldLady:
                 configureVoice(173, 32, 145, 145)
                 break
-            case VoicePreset.EXTRA_TERRESTRIAL:
+            case VoicePreset.ExtraTerrestrial:
                 configureVoice(155, 64, 150, 200)
                 break
-            case VoicePreset.SAM:
+            case VoicePreset.Sam:
                 configureVoice(183, 64, 128, 128)
                 break
-            case VoicePreset.DALEK:
+            case VoicePreset.Dalek:
                 configureVoice(135, 100, 100, 200)
                 break
             default:

@@ -39,10 +39,6 @@ void Billy::init() {
         uBit.audio.mixer.addChannel(*sampleSource, sampleRate, 255);
     }
 
-    // not required?
-    // uBit.audio.setVolume(255);
-     //uBit.audio.setSpeakerEnabled(false);
-    // uBit.io.speaker.setHighDrive(true);
 }
 
 void Billy::flushRemainder() {

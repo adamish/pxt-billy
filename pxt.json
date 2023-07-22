@@ -1,6 +1,6 @@
 {
     "name": "Billy",
-    "version": "0.0.9",
+    "version": "v0.0.10",
     "description": "A text to speech extension for Micro:bit using Makecode",
     "license": "MIT",
     "dependencies": {
@@ -26,7 +26,7 @@
         "sam/ReciterTabs.h",
         "sam/RenderTabs.h"
     ],
-    "testFiles": [],
+    "testFiles": ["test.ts"],
     "public": true,
     "targetVersions": {
         "target": "5.1.2",

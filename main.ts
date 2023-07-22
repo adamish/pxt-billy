@@ -1,22 +1,22 @@
 enum VoicePreset {
-    //% block="Elf"
+    //% block="elf"
     ELF = 1,
-    //% block="Little Robot"
+    //% block="little robot"
     LITTLE_ROBOT = 2,
-    //% block="Stuffy Guy"
+    //% block="stuffy guy"
     STUFFY_GUY = 3,
-    //% block="Little Old Lady"
+    //% block="little old lady"
     LITTLE_OLD_LADY = 4,
-    //% block="Extra_Terrestrial"
+    //% block="extra_terrestrial"
     EXTRA_TERRESTRIAL = 5,
-    //% block="Default"
+    //% block="default"
     SAM = 6,
-    //% block="Dalek"
+    //% block="dalek"
     DALEK = 7
 }
 
 /**
- * Define blocks
+ * Text to speech extension
  */
 //% weight=100 color=#7f00ff icon="\uf028"
 namespace billy {

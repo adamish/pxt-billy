@@ -38,9 +38,5 @@
     "preferredEditor": "tsprj",
     "disablesVariants": [
         "mbdal"
-    ],
-    "extension": {
-        "namespace": "billy",
-        "label": "Billy"
-    }
+    ]
 }

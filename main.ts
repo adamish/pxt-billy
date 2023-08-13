@@ -29,6 +29,7 @@ namespace billy {
      * @param text words to say
      */
     //% block
+    //% group="micro:bit (V2)"
     //% weight=10
     export function say(text: string): void {
         sayShim(text)
@@ -39,6 +40,7 @@ namespace billy {
      * @param phonemes phonemes to pronounce
      */
     //% block
+    //% group="micro:bit (V2)"
     //% weight=7
     export function pronounce(phonemes: string): void {
         pronounceShim(phonemes)
@@ -49,6 +51,7 @@ namespace billy {
      * @param voicePreset Type of voice to use
      */
     //% block Change voice preset
+    //% group="micro:bit (V2)"
     //% weight=9
     export function voicePreset(voicePreset: BillyVoicePreset): void {
         switch (voicePreset) {
@@ -90,6 +93,7 @@ namespace billy {
     //% pitch.min=1 pitch.max=255 pitch.defl=64
     //% throat.min=1 throat.max=255 throat.defl=128
     //% mouth.min=1 mouth.max=255 mouth.defl=128
+    //% group="micro:bit (V2)"
     //% weight=8
     export function configureVoice(speed: number, pitch: number, throat: number, mouth: number): void {
         /*

@@ -44,7 +44,7 @@ function test0() {
  * Use a different voice
  */
 function test1() { 
-    billy.voicePreset(VoicePreset.Elf)
+    billy.voicePreset(BillyVoicePreset.Elf)
     billy.say("Testing testing 1 2 3")
 }
 
@@ -84,6 +84,6 @@ function test5() {
  * speak using phonemes
  */
 function test6() { 
-    billy.voicePreset(VoicePreset.Sam)
+    billy.voicePreset(BillyVoicePreset.Sam)
     billy.pronounce("AY4 AEM AH KUMPYUW3TER")
 }
